@@ -7,3 +7,5 @@ openpyxl
 #Convert
 pycryptodome==3.19.0
 pyperclip==1.8.2
+
+openai
