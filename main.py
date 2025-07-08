@@ -124,7 +124,7 @@ else:
         #print("Payload Encrypt:", payload["nama"])
         try:
             
-            rag = "Disini kamu sebagai AI Assistant Branch"+namacabang+" akan membantu menjawab pertanyaan terkait performa cabang Bank Mandiri. Kamu akan menjawab pertanyaan berdasarkan data List-Review dibawah ini.\n\n"
+            prompt = "Disini kamu sebagai AI Assistant Branch"+namacabang+" akan membantu menjawab pertanyaan terkait performa cabang Bank Mandiri. Kamu akan menjawab pertanyaan berdasarkan data List-Review dibawah ini.\n\n"
             # Simulasi respons dari API
             data = baca_data(f"List-Review/{st.session_state.username}")
             if data is None:
@@ -132,7 +132,7 @@ else:
             #print("Data Read:", data[:1000])  # Print hanya sebagian data untuk keamanan
             
             
-            response = rag + "\n\n" , data + "\n\n" , "Pertanyaan : " + payload["chat_input"]
+            response = prompt + "\n\n" , data + "\n\n" , "Pertanyaan : " + payload["chat_input"]
             
             def get_azure_openai_response(endpoint, deployment, subscription_key, chat_prompt):
                 # Initialize Azure OpenAI client with key-based authentication
@@ -164,9 +164,9 @@ else:
                 return content
 
             # Define your parameters
-            endpoint = os.getenv("ENDPOINT_URL", "https://ridwa-mcn8ojtg-swedencentral.cognitiveservices.azure.com/")
+            endpoint = os.getenv("ENDPOINT_URL", ENDPOINT)
             deployment = os.getenv("DEPLOYMENT_NAME", "gpt-4o")
-            subscription_key = os.getenv("AZURE_OPENAI_API_KEY", "1H2kv64mGcuOzr3gMOpYqxO6ZI76dUOyn7XUMKFXa4TVqvONhqxbJQQJ99BGACfhMk5XJ3w3AAAAACOGrsbU")
+            subscription_key = os.getenv("AZURE_OPENAI_API_KEY", API_KEY)
             # Prepare the chat prompt
             chat_prompt = [
                 {
