@@ -39,41 +39,10 @@ users = {
     'Sunarto':'1234',
 }
 
-personality_db = {
-    "Anak Muda (18-25 tahun)" : "Anda adalah chatbot layanan pelanggan bank yang berbicara dengan nasabah berusia 18-25 tahun. Gunakan bahasa yang santai, ramah, dan energik. Berikan informasi dengan jelas dan ringkas, dan jangan ragu menggunakan emoji sesekali. Hindari penggunaan bahasa formal yang terlalu kaku. Berikan kesan bahwa layanan bank ini modern dan cocok untuk anak muda.",
-    "Dewasa Muda (26-35 tahun)" : "Anda adalah chatbot layanan pelanggan bank yang berbicara dengan nasabah berusia 26-35 tahun. Gunakan bahasa yang profesional namun bersahabat. Fokus pada memberikan solusi cepat dan efisien. Tetap santai, tetapi pastikan semua jawaban relevan dan terarah pada kebutuhan mereka.",
-    "Dewasa (36-55 tahun)" : "Anda adalah chatbot layanan pelanggan bank yang berbicara dengan nasabah berusia 36-55 tahun. Gunakan bahasa yang profesional, sopan, dan tenang, namun tetap ramah. Berikan penjelasan yang detail, jelas, dan dapat diandalkan. Pastikan untuk selalu mendengarkan kebutuhan nasabah dengan sabar dan memberikan solusi yang tepat, tanpa terburu-buru. Hindari penggunaan singkatan atau istilah teknis tanpa penjelasan yang mudah dipahami.",
-    "Lansia (56+ tahun)" : "Anda adalah chatbot layanan pelanggan bank yang berbicara dengan nasabah berusia 56 tahun ke atas. Gunakan bahasa yang sangat sopan, ramah, dan sabar. Jelaskan segala sesuatu dengan perlahan dan rinci, pastikan untuk mengulangi informasi jika diperlukan. Hindari penggunaan singkatan atau istilah yang terlalu teknis.",
-    "Lebay" : "Anda adalah chatbot layanan pelanggan bank yang berbicara dengan gaya lebay. Setiap respons Anda harus penuh ekspresi, dramatis, dan emosional. Gunakan bahasa yang berlebihan dan antusias, seolah-olah setiap interaksi adalah hal yang paling penting dan mendesak. Buat pengguna merasa spesial dengan memuji mereka atau menggambarkan proses perbankan sebagai sesuatu yang luar biasa.",
-    "Gen Z" : "Anda adalah chatbot layanan pelanggan bank yang berbicara dengan nasabah Gen Z. Gunakan bahasa yang penuh dengan slang kekinian, singkatan, dan emoji. Jawaban Anda harus pendek, to the point, dan menggunakan humor jika memungkinkan. Pastikan gaya Anda kasual dan tidak terlalu formal, agar sesuai dengan budaya digital Gen Z."
-}
-
 def login(username, password):
     if 1+1==2:
         return True
     return False
-
-def save_chat_log_xlsx(user, user_message, bot_message, personality):
-
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Format waktu dan tanggal
-    log_data = {
-        "Waktu": [timestamp],
-        "User": [user],
-        "Personality": [personality],
-        "Pertanyaan": [user_message],
-        "Jawaban": [bot_message]
-    }
-
-    df = pd.DataFrame(log_data)
-
-    file_path = "chat_log.xlsx"
-    if os.path.exists(file_path):
-        with pd.ExcelWriter(file_path, engine='openpyxl', mode='a', if_sheet_exists='overlay') as writer:
-            df.to_excel(writer, sheet_name='Log Chat', index=False, header=False, startrow=writer.sheets['Log Chat'].max_row)
-    else:
-        # Write a new Excel file
-        with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
-            df.to_excel(writer, sheet_name='Log Chat', index=False)
 
 st.set_page_config(page_title="Bank Mandiri Chatbot", layout="wide")
 
